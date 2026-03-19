@@ -1,0 +1,31 @@
+﻿@model Library.Domain.Entities.Loan
+
+@{
+    ViewData["Title"] = "Return Book";
+}
+
+<h1>Return Book</h1>
+
+<h3>Confirm return of this book?</h3>
+
+<hr />
+
+<dl class="row">
+    <dt class="col-sm-3">Book</dt>
+    <dd class="col-sm-9">@Model.Book?.Title</dd>
+
+    <dt class="col-sm-3">Member</dt>
+    <dd class="col-sm-9">@Model.Member?.FullName</dd>
+
+    <dt class="col-sm-3">Loan Date</dt>
+    <dd class="col-sm-9">@Model.LoanDate.ToShortDateString()</dd>
+
+    <dt class="col-sm-3">Due Date</dt>
+    <dd class="col-sm-9">@Model.DueDate.ToShortDateString()</dd>
+</dl>
+
+<form asp-action="Return">
+    <input type="hidden" asp-for="Id" />
+    <button type="submit" class="btn btn-success">Confirm Return</button>
+    <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+</form>

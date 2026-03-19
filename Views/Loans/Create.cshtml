@@ -1,0 +1,48 @@
+﻿@model Library.Domain.Entities.Loan
+
+@{
+    ViewData["Title"] = "Create Loan";
+}
+
+<h1>Issue Loan</h1>
+
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <div class="mb-3">
+                <label asp-for="BookId" class="form-label">Book</label>
+                <select asp-for="BookId" class="form-select" asp-items="ViewBag.BookId"></select>
+                <span asp-validation-for="BookId" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="MemberId" class="form-label">Member</label>
+                <select asp-for="MemberId" class="form-select" asp-items="ViewBag.MemberId"></select>
+                <span asp-validation-for="MemberId" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="LoanDate" class="form-label"></label>
+                <input asp-for="LoanDate" class="form-control" type="date" />
+                <span asp-validation-for="LoanDate" class="text-danger"></span>
+            </div>
+
+            <div class="mb-3">
+                <label asp-for="DueDate" class="form-label"></label>
+                <input asp-for="DueDate" class="form-control" type="date" />
+                <span asp-validation-for="DueDate" class="text-danger"></span>
+            </div>
+
+            <button type="submit" class="btn btn-primary">Issue Loan</button>
+            <a asp-action="Index" class="btn btn-secondary">Back to List</a>
+        </form>
+    </div>
+</div>
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}

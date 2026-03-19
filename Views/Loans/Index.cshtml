@@ -1,0 +1,48 @@
+﻿@model IEnumerable<Library.Domain.Entities.Loan>
+
+@{
+    ViewData["Title"] = "Loans";
+}
+
+<h1>Loans</h1>
+
+<p>
+    <a asp-action="Create" class="btn btn-primary">Issue New Loan</a>
+</p>
+
+<table class="table table-bordered table-striped">
+    <thead>
+        <tr>
+            <th>Book</th>
+            <th>Member</th>
+            <th>Loan Date</th>
+            <th>Due Date</th>
+            <th>Returned Date</th>
+            <th>Status</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            var status = item.ReturnedDate == null ? "On Loan" : "Returned";
+            <tr>
+                <td>@item.Book?.Title</td>
+                <td>@item.Member?.FullName</td>
+                <td>@item.LoanDate.ToShortDateString()</td>
+                <td>@item.DueDate.ToShortDateString()</td>
+                <td>@(item.ReturnedDate?.ToShortDateString() ?? "-")</td>
+                <td>@status</td>
+                <td>
+                    <a asp-action="Details" asp-route-id="@item.Id">Details</a>
+                    @if (item.ReturnedDate == null)
+                    {
+                        <text> | </text>
+                
+                        <a asp-action="Return" asp-route-id="@item.Id">Return</a>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
